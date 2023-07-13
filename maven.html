@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selenium Cheat Sheet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+       <div class="navbar-brand">
+       
+  
+          <a
+            role="button"
+            class="navbar-burger"
+            id="burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div> 
+  
+        <div class="navbar-menu" id="navbarBasicExample">
+          <div class="navbar-start"> 
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Menu
+              </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="./index.html">Home</a>
+              <a class="navbar-item" href="#locators">Locators</a>
+              <a class="navbar-item" href="#common-elements">Common Elements</a>
+              <a class="navbar-item" href="#calendars">Calendars, Tables and Grids</a>
+              <a class="navbar-item" href="#sync">Sync</a>
+              <a class="navbar-item" href="./actions.html">Actions</a>
+              <a class="navbar-item" href="./actions.html">Frames and Windows</a>
+              <a class="navbar-item" href="./actions.html">Assert</a>
+              <a class="navbar-item" href="./screenshots.html">Screenshots/SSL Cookies</a>
+              <a class="navbar-item" href="./screenshots.html">File Downloads</a>
+              <a class="navbar-item" href="./screenshots.html">Global Environment</a>
+              <a class="navbar-item" href="./coreJava.html">Core Java</a>
+              <a class="navbar-item" href="./maven.html">TestNG and Maven</a>
+              <a class="navbar-item" href="./jenkins.html">Jenkins</a>
+            </div>
+          </div>
+
+         
+        </div>
+      </nav>
+
+
+      <section class="hero is-small">
+        <!-- <figure class="image is-16by9">
+          <image class="has-ratio" width="640" height="360" src="./codeImage.jpg" frameborder="0" allowfullscreen></iframe>
+        </figure> -->
+      <div class="hero-body">
+        <p class="title">
+     TestNG and Maven
+        </p>
+        <p class="subtitle">
+        Enhance your automation tests by inclusing TestNG and Maven frameworks.
+        </p>
+      </div>
+    </section>
+  <section class="section" id="common-elements">
+    <h1 class="title">Maven</h1>
+    <h2 class="subtitle">
+      The Maven repo will be used all the time to add dependencies to your framework.
+    </h2>
+    <p>Right click on your project and then configure and then Convert to Maven Project.
+      <br>
+      This will create a pom.xml file in your project and where you will add all your dependencies build data etc.
+    </p>
+    <p>Your dependencies can be found at https://mvnrepository.com/. You will always need the Selenium Java one. You just 
+      search and then click the latest stable version. Then copy the dependency into your pom.xml file. You can also 
+      download the jar files and then add them by right clicking on your project and going into the properties And
+      Java Build Path then select External JAR files. However, this will mean you may not be using the most recent version
+      whereas copying the dependency means you would only need to update the verion number rather than downloading new 
+      files each time.
+      <br>
+      This image shows a good template for what you will need in your pom.xml file - version numbers will likely need
+      to be changed.
+    </p>
+    <br>
+    <button
+    class="js-modal-trigger button is-primary"
+    data-target="modal-js-pom"
+  >
+    See image
+  </button>
+    <div id="modal-js-pom" class="modal">
+      <div class="modal-background"></div>
+  
+      <div class="modal-content">
+        <div class="box">
+          <img class="has-ratio" width="1280" height="720"src="./pom.png">
+        </div>
+      </div>
+    </div>
+
+    <h2 class="subtitle">
+      How to run your test suite from the command line you need to have the Maven Surefire Plugin in your pom.xml file.
+    </h2>
+    <br>
+    <p>
+      Navigate to project in terminal, run mvn test. This will clean and compile first, then run the tests. This will run 
+      all tests from test folder in project. 
+      <br>
+      To integrate with testNG and run only specific tests based on your testng.xml file then make sure you have the testNG
+      dependency in your pom.xml file. You then need to add your configuration tag into the surefile plugin and provide the 
+      the testng.xml file name into it like below:
+      <br>
+      <code>
+        &lt;plugins&gt;
+        <br>
+          &lt;plugin&gt;
+          <br>
+           &lt;groupId>org.apache.maven.plugins&lt;/groupId&gt;
+           <br>
+           &lt;artifactId>maven-surefire-plugin&ltl/artifactId&gt;
+           <br>
+           &lt;version>2.20&lt;/version&gt;
+           <br>
+           &lt;configuration&gt;
+           <br>
+             &lt;suiteXmlFiles>
+             <br>
+               &lt;suiteXmlFile>testng.xml&lt;/suiteXmlFile&gt;
+               <br>
+             &lt;/suiteXmlFiles&gt;
+             <br>
+           &lt;/configuration&gt;
+           <br>
+         &lt;/plugin&gt;
+         <br>
+        &lt;/plugins&gt;
+      </code>
+      <br>
+      You can also use Profiles if you have multiple testNG files - for exmaple, one for regression and one for smoke.
+      Basically, you just copy and paste the above code (upto the build tag) and above the build tags you add a Profiles
+      tag and two child profile tags - then give each profile tag an ID of the name you want - Regression and Smoke.
+      Then just make sure you rename the file in the newly pasted code to reflect the correct testng.xml files. Then
+      to run using terminal simply run <code>mvn test -PRegression</code>. This will now look for the id of Regression
+      in the pom.xml file and run onlt the regression.xml file.
+    </p>
+
+  </section>
+  <section class="section" id="calendars">
+    <h1 class="title">TestNG</h1>
+    <h2 class="subtitle">
+      TestNG is a testing framework where you can organise your tests and run them in different groups etc.
+    </h2>
+    <p>Firstly, right click on your project and then TestNG and then Convert to TestNG. This will create a testng.xml 
+      file. Below will break down what each section means. You also need to add the testNG as dependency in the pom.xml file
+      and the testNG library.
+      <br>
+      Right click on project and select properties
+      <br>
+      Choose Java Build Path
+      <br>
+      Select classpath from tress
+      <br>
+      Select Add library
+      <br>
+      Select TestNG and click next and finish
+
+      <code>
+        &lt;dependency&gt;
+        <br>
+          &lt;groupId&gt;org.testng&lt;/groupId&gt;
+          <br>
+          &lt;artifactId>testng&lt;/artifactId&gt;
+          <br>
+          &lt;version>6.8&lt;/version&gt;
+          <br>
+          &lt;scope>test&lt;/scope&gt;
+          <br>
+        &lt;/dependency>
+      </code>
+    </p>
+
+ <p>Suite is the parent container for everything and where all your other tags will sit in.
+  <br>
+  Then you also have tests where you will name the test and add any classes which fall under that test.
+  <br>
+  Once the tests are added - you can add annotations to the methods in your class files e.g. <code>@BeforeTest</code>. This 
+  is useful for any pre-requisite activities which need to be done before the tests start. You can also have
+  <code>@AfterTest</code> for any after test activities. You can also have before/after suite and method. You can have
+   different test tags in the same class file but must be in different methods.
+   <br>
+   You can group tests together with different group labels. On the test after the test annotation simply give it a label
+   like <code>@Test(groups=("smoke")</code>. Then in the testng.xml file you can add the groups tag and specify which
+   groups you want to run - so if you only wanted to run tests with a smoke label in the xml file. 
+   <br>
+   <button
+   class="js-modal-trigger button is-primary"
+   data-target="modal-js-testNG"
+ >
+   See image
+ </button>
+   <div id="modal-js-testNG" class="modal">
+     <div class="modal-background"></div>
+
+     <div class="modal-content">
+       <div class="box">
+         <img class="has-ratio" width="1280" height="720"src="./testNG.png">
+       </div>
+     </div>
+   </div>
+
+  
+ 
+ </p>
+
+
+
+  <h2 class="subtitle">
+    Listeners
+  </h2>
+
+ <p>
+  Listeners are really useful to handle specific scenarios in your test. Firstly, create a listeners class File and when 
+  you import the below you will get all the methods like what you want to happen when a test fails or passes or is skipped.
+  There are more methods than shown below but these are just a couple of examples. Like, get a screenshot on test failures.
+  <br>
+  Then in your testng.xml file you need to add the listeners
+  <br>
+  <button
+  class="js-modal-trigger button is-primary"
+  data-target="modal-js-listeners"
+>
+  See image
+</button>
+  <div id="modal-js-listeners" class="modal">
+    <div class="modal-background"></div>
+
+    <div class="modal-content">
+      <div class="box">
+        <img class="has-ratio" width="1280" height="720"src="./listeners.png">
+      </div>
+    </div>
+  </div>
+<br>
+  <code>
+    import org.testng.ITestContext;
+    <br>
+import org.testng.ITestListener;
+<br>
+import org.testng.ITestResult;
+<br>
+
+public class Listeners implements ITestListener {
+	<br>
+	@Override
+  <br>
+	public void onTestStart(ITestResult result) {
+    <br>
+		// TODO Auto-generated method stub
+		<br>
+	}
+<br>
+	@Override
+  <br>
+	public void onTestSuccess(ITestResult result) {
+    <br>
+		// TODO Auto-generated method stub
+		<br>
+		//System.out.println("I successfully executed Listeners Pass code");
+    <br>
+	}
+<br>
+	@Override
+  
+  <br>
+	public void onTestFailure(ITestResult result) {
+    <br>
+		// TODO Auto-generated method stub
+    <br>
+		//screenshot code 
+    <br>
+		//response if API is failed
+		<br>
+		System.out.println("I failed executed Listeners Pass code" +result.getName());
+<br>
+	}
+<br>
+	
+
+}
+
+  </code>
+ </p>
+
+
+ <h2 class="subtitle">
+Data Providers
+</h2>
+    <p>You can also use Data Providers and then pass them in tests.</p>
+    <br>
+  <p>Firstly, lets create the method which will be tested
+    <br>
+    <code>
+      @Test(dataProvider="getData") 
+      <br>
+	public void Demo6(String username, String password)
+  <br>
+	{
+    <br>
+	System.out.println("hello from 4");
+  <br>
+	System.out.println(username);
+  <br>
+	System.out.println(password);
+	<br>
+	}
+    </code>
+    <br>
+    So, the first thing to notice is that we are adding a dataProvider after the 
+    test annotation and providing a value of getData. This will be the name of the 
+    method which we will add the data we want to use as parameters. The other thing
+    to notice is we are also passing parameters in the method Demo6. Two Strings - 
+    password and username. In this test we are simply going to print a few different
+    usernames and passwords which we will provide elsewhere.
+    <br>
+    Now we will add our data. 
+    <br>
+    <code>
+      @DataProvider
+      <br>
+      public Object[][] getData()
+      <br>
+      {
+        <br>
+      
+        //1st
+        <br>
+        Object[][] data = new Object [3][2];
+        <br>
+        data[0][0]= "matt";
+        <br>
+        data[0][1]= "12345";
+        <br>
+        //2nd
+        <br>
+        data[1][0]= "George";
+        <br>
+        data[1][1]= "99999";
+        <br>
+        //3rd
+        <br>
+        data[2][0]="Sophie";
+        <br>
+        data[2][1]= "55555";
+        <br>
+        return data;
+        <br>
+      }
+    </code>
+    <br>
+    You can see we are returning an object. This 
+    is represented by the <code>[][]</code>. Then creating a new instance where 
+    we determine how many parameters and how many values we want in our object. 
+    In this case we are having 3 different parameters and in each one there are 
+    two data types. The String username and String password.
+    <br>
+    We have called this object data and now we are going to add the parameters
+    to the data object and return it. Now when you run the Demo6 test it will
+    grab the data from this dataProvider and run it three times for each of the 
+    parameters.
+  </p>
+
+  <br>
+  <h2 class="subtitle">
+   Parameters
+    </h2>
+
+    <p>
+      You can also pass parameters into your tests. Line 7 in the image of testng.xml file. We are giving the name
+      of URL and then a value.
+      <br>
+      
+      <button
+      class="js-modal-trigger button is-primary"
+      data-target="modal-js-listeners"
+    >
+      See image
+    </button>
+      <div id="modal-js-listeners" class="modal">
+        <div class="modal-background"></div>
+    
+        <div class="modal-content">
+          <div class="box">
+            <img class="has-ratio" width="1280" height="720"src="./listeners.png">
+          </div>
+        </div>
+      </div>
+    <br>
+    So in the method we add the paramter tag with the name above the test tag. Then 
+    pass a String variable to use for the parameter. Then when we print urlname
+    it will use the value of the parameter. In this case it would print in the console
+    basics3 www.bbc.co.uk<br>
+    The below example also shows another useful tag - dependsOnMethods - here this is 
+    making sure that the method "Mobile2" will run before this one.
+<br>
+    <code>
+      @Parameters({"URL"}) // add parameter tag and name from xml
+      <br>
+	@Test(dependsOnMethods=("Mobile2")) // depends on will make sure mobile 2 runs first
+  <br>
+	public void Mobile1(String urlname) // pass String and a name into method
+  <br>
+	{
+    <br>
+	System.out.println("mobile1");
+  <br>
+	System.out.println("basics3" + urlname); // use name
+  <br>
+	}
+    </code>
+    </p>
+</section>
+  <script src="script.js"></script>
+</body>
+</html>

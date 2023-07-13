@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selenium Cheat Sheet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+       <div class="navbar-brand">
+       
+  
+          <a
+            role="button"
+            class="navbar-burger"
+            id="burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div> 
+  
+        <div class="navbar-menu" id="navbarBasicExample">
+          <div class="navbar-start"> 
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Menu
+              </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="./index.html">Home</a>
+              <a class="navbar-item" href="#locators">Locators</a>
+              <a class="navbar-item" href="#common-elements">Common Elements</a>
+              <a class="navbar-item" href="#calendars">Calendars, Tables and Grids</a>
+              <a class="navbar-item" href="#sync">Sync</a>
+              <a class="navbar-item" href="./actions.html">Actions</a>
+              <a class="navbar-item" href="./actions.html">Frames and Windows</a>
+              <a class="navbar-item" href="./actions.html">Assert</a>
+              <a class="navbar-item" href="./screenshots.html">Screenshots/SSL Cookies</a>
+              <a class="navbar-item" href="./screenshots.html">File Downloads</a>
+              <a class="navbar-item" href="./screenshots.html">Global Environment</a>
+              <a class="navbar-item" href="./coreJava.html">Core Java</a>
+              <a class="navbar-item" href="./maven.html">TestNG and Maven</a>
+              <a class="navbar-item" href="./jenkins.html">Jenkins</a>
+            </div>
+          </div>
+
+         
+        </div>
+      </nav>
+
+
+      <section class="hero is-small">
+        <!-- <figure class="image is-16by9">
+          <image class="has-ratio" width="640" height="360" src="./codeImage.jpg" frameborder="0" allowfullscreen></iframe>
+        </figure> -->
+      <div class="hero-body">
+        <p class="title">
+       Actions/Frame/Windows/Assert
+        </p>
+       
+      </div>
+    </section>
+
+    <section class="section" id="sync">
+      <h1 class="title">Actions</h1>
+      <h2 class="subtitle">
+   Selenium also allows for you to add actions that users do on keyboards like hold shift or scroll.
+
+      </h2>
+      <p>
+        To begin you need to create new object of the Actions class and pass your driver 
+        as a parameter <code>	Actions a = new Actions(driver);</code>. Then you can 
+        access all of its methods. There are many methods available and you can chain them
+        together but they all need to end with <code>.build().perform();</code>. The below example
+        is how move the mouse over to an element then click and enter some text in upper case.
+        
+        <code>a.moveToElement(driver.findElement(By.id("twotabsearchtextbox"))).click().keyDown(Keys.SHIFT).sendKeys("hello").doubleClick().build().perform();</code>.
+        This next one is to right click onto something. <code>a.moveToElement(driver.findElement(By.id("nav-search-submit-button"))).contextClick().build().perform();</code>
+      </p>
+   
+    </section>
+
+    <section class="section" id="sync">
+      <h1 class="title">Frames</h1>
+      <h2 class="subtitle">
+        A Frame is on the same tab but kind of like a mini tab within a main browser page. Normal locators
+        wont work here. So you need to switch to the frame you want to interact with.
+
+      </h2>
+      <p>
+        There are two main ways to do this.
+        <br> 
+        By using a locator of the frame <code>driver.switchTo().frame(driver.findElement(By.cssSelector("iframe.demo-frame")));</code>
+        <br>
+        By index <code>driver.switchTo().frame(0);</code>
+        <br>
+        In the below example - we are switching to the frame and then using actions to drag and drop 
+        an element and then return to main frame.<br>
+        <code>
+          driver.get("https://jqueryui.com/droppable/");
+          <br>
+          driver.switchTo().frame(driver.findElement(By.cssSelector("iframe.demo-frame")))
+          <br>
+          driver.findElement(By.id("draggable")).click();
+          <br>
+          Actions a  = new Actions(driver);
+          <br>
+          WebElement source = driver.findElement(By.id("draggable"));
+          <br>
+          WebElement target = driver.findElement(By.id("droppable"));
+          <br>
+          a.dragAndDrop(source, target).build().perform();
+        <br>
+          driver.switchTo().defaultContent();
+        </code>
+      </p>
+   
+    </section>
+
+    <section class="section" id="windows">
+      <h1 class="title">Windows</h1>
+      <h2 class="subtitle">
+        A window is another tab open in your browser - the below shows how to switch between the two to 
+        interact with its elements.
+
+      </h2>
+      <p>
+        The first thing is to set up the windows handles and then the iterator for it. This allows us to 
+        switch between the windows. The below is when you have clicked on a link in your original window
+        to open a new one.
+        <code>
+          Set<String> windows = driver.getWindowHandles(); 
+        </code>
+        <br>
+        <code>Iterator<String>it = windows.iterator();</code>
+          <br>
+          Then you need assign each window to a string variable
+          <code>String parentId = it.next();</code>
+          <br>
+          <code>String childId = it.next();</code>
+          <br>
+          Then you can use the switch method to switch between the windows and perform any actions
+          <br>
+          <code>driver.switchTo().window(childId);</code>
+          <br>
+          You can also open a new tab using Selenium and then switch to it to load a URL and perform
+          your actions.
+          <br>
+          <code>driver.switchTo().newWindow(WindowType.TAB);</code>
+          <br>
+          This won't automatically switch to the new tab though, you still need to do the handles
+          and iterator and of course driver.get("url") for the new page you want to load.
+      </p>
+   
+    </section>
+
+    <section class="section" id="windows">
+      <h1 class="title">Scope</h1>
+      <h2 class="subtitle">
+        You can also create sub drivers to limit the scope of what you want to do on a page.
+
+      </h2>
+      <p>
+     In this example you will determine how many links are on the page and then set a sub driver 
+     for the footer section and then count how many links are on the footer section. 
+     <br>
+     Create driver object as usual <code>WebDriver driver=new ChromeDriver();</code>
+<br>
+  Load the page   <code>driver.get("http://qaclickacademy.com/practice.php");</code>
+     <br>
+
+     Get the number of links <code>System.out.println(driver.findElements(By.tagName("a")).size());</code>
+     <br>
+        Create sub driver for the footer <code>WebElement footerdriver=driver.findElement(By.id("gf-BIG"));</code>
+      </p>
+   
+      Get number of links in footer section <code>System.out.println(footerdriver.findElements(By.tagName("a")).size());</code>
+   <br>
+   You could then click on each link in the footer to verify they open
+   <br>
+   <code>
+    
+		for(int i=1;i<footerdriver.findElements(By.tagName("a")).size();i++)>
+    <br>
+		{
+			<br>
+			String clickonlinkTab=Keys.chord(Keys.COMMAND,Keys.ENTER);
+			<br>
+			coloumndriver.findElements(By.tagName("a")).get(i).sendKeys(clickonlinkTab);
+      <br>
+			Thread.sleep(5000L);
+			<br>
+		}
+    <br>
+		Set<String> abc=driver.getWindowHandles();
+      <br>
+		Iterator<String> it=abc.iterator();
+		<br>
+		while(it.hasNext())
+    <br>
+		{
+			<br>
+		   driver.switchTo().window(it.next());
+       <br>
+		   System.out.println(driver.getTitle());
+       <br>
+		
+		}
+   </code>
+   
+    </section>
+    
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selenium Cheat Sheet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+       <div class="navbar-brand">
+       
+  
+          <a
+            role="button"
+            class="navbar-burger"
+            id="burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div> 
+  
+        <div class="navbar-menu" id="navbarBasicExample">
+          <div class="navbar-start"> 
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Menu
+              </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="./index.html">Home</a>
+              <a class="navbar-item" href="#locators">Locators</a>
+              <a class="navbar-item" href="#common-elements">Common Elements</a>
+              <a class="navbar-item" href="#calendars">Calendars, Tables and Grids</a>
+              <a class="navbar-item" href="#sync">Sync</a>
+              <a class="navbar-item" href="./actions.html">Actions</a>
+              <a class="navbar-item" href="./actions.html">Frames and Windows</a>
+              <a class="navbar-item" href="./actions.html">Assert</a>
+              <a class="navbar-item" href="./screenshots.html">Screenshots/SSL Cookies</a>
+              <a class="navbar-item" href="./screenshots.html">File Downloads</a>
+              <a class="navbar-item" href="./screenshots.html">Global Environment</a>
+              <a class="navbar-item" href="./coreJava.html">Core Java</a>
+              <a class="navbar-item" href="./maven.html">TestNG and Maven</a>
+              <a class="navbar-item" href="./jenkins.html">Jenkins</a>
+            </div>
+          </div>
+
+         
+        </div>
+      </nav>
+
+
+      <section class="hero is-small">
+        <!-- <figure class="image is-16by9">
+          <image class="has-ratio" width="640" height="360" src="./codeImage.jpg" frameborder="0" allowfullscreen></iframe>
+        </figure> -->
+      <div class="hero-body">
+        <p class="title">
+         Core Java
+        </p>
+        <p class="subtitle">
+        Some useful Java to know for Selenium
+        </p>
+      </div>
+
+    </section>
+    <section class="section" id="data-types">
+      <h1 class="title">Data Types</h1>
+      <h2 class="subtitle">
+    
+      </h2>
+      <p>Below are the main data types with an example variable.</p>
+      <br>
+    <code> int myNum = 5;
+      <br>
+      int yourNum = 10;
+      <br>
+      String myName = "Matt";
+      <br>
+      char letter = 'j';
+      <br>
+      double anotherNum = 5.99;
+      <br>
+      boolean myCard = true;</code>
+    </section>
+
+    <section class="section" id="arrays">
+      <h1 class="title">Arrays</h1>
+      <h2 class="subtitle">
+        The best way to create an array is <code>int[] arr2 = {1,2,4,5,6,75,40};</code> or 
+        <code>String[] arr3 = {"Matt", "Sophie","George","Martha"};</code> 
+      </h2>
+      <p>Then you can find an item in the array by <code>System.out.println(arr2[3]);</code> 
+      as its a zero based index this would print the fourth item in the array - 5.
+      <br>
+      You can also loop through the array and perform any actions needed.
+        
+    
+      </p>
+    
+
+    </section>
+
+    <section class="section" id="common-elements">
+      <h1 class="title">Loops</h1>
+      <h2 class="subtitle">
+       Loops allow you to peform an action(s) on a number of items.
+      </h2>
+      <p> If you take our above arrays we can iterate through the array and print out each item.
+        Firstly set your iterator as 0, then set how many times it should iterate, in this case its the 
+        length of the array, then what to do after each iteration. IN this case we are increasing i by one.
+        So from when i = 0 until i = the length of the array peform the action in the block. This is 
+        a simple action of printing the value of i in the array. 
+      </p>
+      <code>
+        for(int i=0; i&lt;myArray.length&gt; i++)
+          <br>
+  {
+    <br>
+    System.out.println(myArray[i]);
+    <br>
+  }
+      </code>
+      <br>
+      You can also have enhanced loops like the below which would print out each item in array.
+      <br>
+
+      <code>
+        for(String s: arr3)
+        <br>
+        {
+          <br>
+          System.out.println(s);
+          <br>
+        }
+        
+      </code>
+    </section>
+
+
+  <section class="section" id="common-elements">
+    <h1 class="title">Conditional Statements</h1>
+    <h2 class="subtitle">
+     Conditional statements will execute a code block if certain conditions are met.
+    </h2>
+    <p>If we take the above array and this time instead of printing out each item, we
+      will only print it if the value is greater than 20.
+     <br>
+      <code>
+        for(int i=0; i<myArray.length> i++)
+          <br>
+  {
+    <br>
+    if(myArray[i] > 20)
+    <br>
+    {
+      <br>
+      System.out.println(myArray[i]);
+      <br>
+    }
+   
+    <br>
+  }
+      </code>
+      <br>
+      So in this case it will only print 30 and 40. 
+      <br>
+      You can also have multiple conditions so this time we
+      will print a message depending on the the value.
+      <br>
+      <code>
+        for(int i=0; i&lt;myArray.length&gt; i++)
+          <br>
+  {
+    <br>
+    if(myArray[i] > 20)
+    <br>
+    {
+      <br>
+      System.out.println(myArray[i]+" is higher than 20");
+      <br>
+    }
+    <br>
+    else 
+    <br>
+    {
+      <br>
+      System.out.println(myArray[i]+" is equal or smaller than 20");
+    }
+   
+    <br>
+  }
+      </code>
+      <br>
+      If you have many different conditions it is best to use a case statement rather than if.
+    </p>
+ 
+  </section>
+ 
+
+
+  <section class="section" id="common-elements">
+    <h1 class="title">Strings</h1>
+    <h2 class="subtitle">
+     Here are some useful things to do with strings:
+    </h2>
+    <p>We will work with this string <code>String myString = "    I am a string, hello    "</code>
+    You can see there are multiple words and also spaces at the front and back.
+    <br>
+    Here a are a few useful things you can do with this string.
+    </p>
+    <p>Trim all the white space before and after the string <code>String myTrimString = myString.trim();</code></p>
+    <p>Turn the string into an array, first you need to split it by the space</p>
+    <br>
+    <code>
+      String[] myArray = myTrimString.split(" ");
+    </code>
+    <br>
+    So now if you wanted to get an item you could <code>System.out.println(myArray[2]);</code>
+    which would print out 'a' as this is the 3rd item in the array.
+    <br>
+    <p>
+      Print the string in reverse by each character
+      <br>
+      <code>
+        for(int i=myTrimString.length()-1;i>=0;i--)
+		<br>
+		{
+      <br>
+			System.out.println(myTrimString.charAt(i));
+      <br>
+		}
+      </code>
+    </p>
+
+  </section>
+
+  <section class="section" id="common-elements">
+    <h1 class="title">Methods</h1>
+    <h2 class="subtitle">
+      We will look at methods in the same class and then also methods from a different class.
+    <p>From the same class</p>
+    <p>So you can see in the image we have created a new class called CoreJavaMethods. Then we have
+      created a new object of the method called "d". Then in lines 7 and 8 we are assinging values to
+      the variables <code>name</code> and <code>name2</code>. 
+      <br>
+      Then you can see the methods where we are defining what should be in the name and name2 variables from 
+      the <code>getData</code> and <code>getData2</code> methods in lines 24 to 36. They are slightly different
+      as getData2 has <code>static</code> in the method and getData doesn't. This is why name needs to have <code>d.getData2()</code>
+      rather than just getData().
+      <br>
+      You can also see its printing both the print log of "hello" but also what is being returned "greetings". However, this is 
+      only printing because we are printing name and name2. If we simply just call the method on its own like 
+      <code>getData()</code> or <code>getData2()</code> then it would only print the "hello" and "hello2"
+    </p>
+
+    <br>
+    <p>
+      Now if you want to access methods from different classes....
+    </p>
+    <p>
+      Firstly, create a new class called "MethodsDemo2". Then create a new object of the class in your original class not the new one <code>
+        MethodsDemo2 d1 = newMethodsDemo2();
+      </code>. 
+      <br>
+      Now in that new class just create a simple method like the below:
+      <br>
+      <code>
+        public String getUserData()
+        <br>
+        {
+          <br>
+          System.out.println("James");
+          <br>
+          return "Smith";
+          <br>
+          
+        }
+      </code>
+      <br>
+      Then back in your CoreJavaMethods class you can call this method with <code>
+        d1.getUserData();
+      </code>. Remember if you run this it will only print what you have asked to print, not what is being returned.
+    </p>
+
+    <button
+    class="js-modal-trigger button is-primary"
+    data-target="modal-js-methods"
+  >
+    See image
+  </button>
+    <div id="modal-js-methods" class="modal">
+      <div class="modal-background"></div>
+
+      <div class="modal-content">
+        <div class="box">
+          <img class="has-ratio" width="1280" height="720"src="./methods.png">
+        </div>
+      </div>
+    </div>
+
+  </section>
+    
+
+
+  <section class="section" id="common-elements">
+    <h1 class="title">Streams</h1>
+    <h2 class="subtitle">
+      Streams are a brilliant way to optimise your code. You basically, just chain methods onto each other.
+    </h2>
+    <p>If you think of a for loop with a conditional statement and how many 
+       lines of code there are. Then compare with using Java Streams. In the below example, we are going to create 
+      an array of names, then we want to only get names that ends with "n". Then we want to change each of those to 
+    upper case. Finally, we will print them in the console.
+    <br>
+   <code>
+    Stream.of("Ciaran","Matty","Boydy","Liam","Kieran").filter(s->s.endsWith("n")).map(s->s.toUpperCase())
+		.forEach(s->System.out.println(s));
+   </code>
+   <br>
+   This will print CIARAN KIERAN. If you wanted to put this into a new list then you could:
+   <br>
+   <code>List&lt;String&gt;ls = Stream.of("Ciaran","Matty","Boydy","Liam","Kieran").filter(s->s.endsWith("n")).map(s->s.toUpperCase())
+		.collect(Collectors.toList());
+		ls.get(0);</code> 
+    <br>
+    so now you have a new list called "ls".
+  </p>
+ <p>
+  You can also remove duplicates and sort lists into an order. Create the list <code>List &lt;Integer&gt;values= Arrays.asList(4,4,6,8,2,3,8,9,22,4,6,7,6);</code>
+ To do this simply <code>values.stream().distinct().sorted().forEach(s->System.out.println(s));</code>
+ <br>
+ You could also turn a array of strings which are numbers into an array of integers. For example,<br>
+ <code>String[] arr5 = {"1","2","4","5","6","75","40"};</code>
+
+ <br>
+ <code>int[] values2 = Arrays.stream(arr5).mapToInt(Integer::parseInt)
+  .toArray();</code>
+  </p>
+  <br>
+<p>
+  You can merge two lists by <code>Stream &gt;String&gt; newStream = Stream.concat(names.stream(), names1.stream());
+		newStream.forEach(s->System.out.println(s));</code>
+</p>
+<br>
+<p>
+  You can also reverse the order of a list by first creating the list  <code> List &lt;String&gt; mylist = new ArrayList<String>();</code>
+
+ and then adding the items
+ <br>
+ <code>
+
+ 
+		
+    mylist.add("item");
+    <br>
+        mylist.add("another item");
+        <br>
+
+        mylist.add("some other thing");
+        <br>
+        mylist.add("even another one");
+        </code>
+        <br>
+        And then use the Collections to get the reverse method passing your list name as the variable.
+        <code>Collections.reverse(mylist);</code>
+        
+</p>
+  </section>
+
+  <section class="section" id="common-elements">
+    <h1 class="title">Map and Filter</h1>
+    <h2 class="subtitle">
+      A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading.
+    </h2>
+    <p>Here is some code</p>
+  <code> this should be in a code block</code>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

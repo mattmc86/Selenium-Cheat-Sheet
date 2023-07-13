@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar is-success" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+       <div class="navbar-brand">
        
   
           <a
@@ -25,23 +25,41 @@
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
-        </div>
+        </div> 
   
         <div class="navbar-menu" id="navbarBasicExample">
-          <div class="navbar-end">
-            <a class="navbar-item" href="#locators">Locators</a>
-            <a class="navbar-item" href="#common-elements">Common Elements</a>
-            <a class="navbar-item" href="#calendars">Calendars, Tables and Grids</a>
-            <a class="navbar-item" href="#sync">Sync</a>
-            <a class="navbar-item" href="#actions">Actions</a>
-            <a class="navbar-item" href="#frames">Frames and Windows</a>
-            <a class="navbar-item" href="#assert">Assert</a>
+          <div class="navbar-start"> 
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Menu
+              </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="./home.html">Home</a>
+              <a class="navbar-item" href="#locators">Locators</a>
+              <a class="navbar-item" href="#common-elements">Common Elements</a>
+              <a class="navbar-item" href="#calendars">Calendars, Tables and Grids</a>
+              <a class="navbar-item" href="#sync">Sync</a>
+              <a class="navbar-item" href="./actions.html">Actions</a>
+              <a class="navbar-item" href="./actions.html">Frames and Windows</a>
+              <a class="navbar-item" href="./actions.html">Assert</a>
+              <a class="navbar-item" href="./screenshots.html">Screenshots/SSL Cookies</a>
+              <a class="navbar-item" href="./screenshots.html">File Downloads</a>
+              <a class="navbar-item" href="./screenshots.html">Global Environment</a>
+              <a class="navbar-item" href="./coreJava.html">Core Java</a>
+              <a class="navbar-item" href="./maven.html">TestNG and Maven</a>
+              <a class="navbar-item" href="./jenkins.html">Jenkins</a>
+            </div>
           </div>
+
+         
         </div>
       </nav>
-    <section class="hero is-success">
-    <div class="hero-body">
-      <p class="title">
+    <!-- <section class="hero is-success is-medium heroSection">
+      <figure class="image is-16by9">
+        <image class="has-ratio" width="640" height="360" src="./codeImage.jpg" frameborder="0" allowfullscreen></iframe>
+      </figure> -->
+    <!-- <div class="hero-body">
+      <p class="title is-white">
         Selenium & Frameworks
       </p>
       <p class="subtitle">
@@ -49,39 +67,390 @@
        with Selenium
       </p>
     </div>
-  </section>
+  </section>  -->
 
   <section class="section" id="locators">
     <h1 class="title">Locators</h1>
     <h2 class="subtitle">
-      A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading.
+     Locators are used to identify elements in the HTML. You need to inspect the page
+     to see which locator you can use. It must be unique otherwise Selenium will pick the first one. You then
+     chain a method onto the end for the action you want to take e.g. click or type something in.
     </h2>
-    <p>Here is some code</p>
-  <code> this should be in a code block</code>
+    <li>
+      By.id - simply paste the id 
+      <br>
+      <code> driver.findElement(By.id("inputUsername")).sendKeys("test@gmail.com");</code>
+      <button
+      class="js-modal-trigger button is-primary"
+      data-target="modal-js-id"
+    >
+      See image
+    </button>
+      <div id="modal-js-id" class="modal">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+          <div class="box">
+            <img class="has-ratio" width="640" height="360"src="./idLocator.png">
+          </div>
+        </div>
+      </div>
+      <!-- <figure  class="image is-16by9">
+        <img class="has-ratio" width="640" height="360"src="./idLocator.png">
+      </figure> -->
+     
+      <br>
+
+
+    </li>
+    <li>
+      By.name - simply paste the name 
+      <br>
+      <code>driver.findElement(By.name("inputPassword")).sendKeys("12345");</code>
+      
+      <button
+      class="js-modal-trigger button is-primary"
+      data-target="modal-js-name"
+    >
+      See image
+    </button>
+      <div id="modal-js-name" class="modal">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+          <div class="box">
+            <img class="has-ratio" width="640" height="360"src="./nameLocator.png">
+          </div>
+        </div>
+      </div>
+    </li>
+
+
+
+
+
+
+
+    <li>
+      By.className - add a dot before a class name - classes are seperated by a space in HTML
+      <br>
+      <code>driver.findElement(By.className("signInBtn")).click();</code>
+    </li>
+    <li>
+      By.cssSelector - 
+      <br>
+      <code>driver.findElement(By.cssSelector(".add-to-cart")).click();</code>
+    </li>
+    <li>
+      By.xpath - there are a few ways for this. It will start with two forward slashes,
+      then the HTML tag then in square brackets its an @ followed by the elements 
+      you are targeting e.g. <code>//input[@type="submit"][3]</code> You can also see the end part
+      here means it is targeting the 3rd element with a type of submit on the page. This isn't a 
+      great example as generally you will only have one submit on a page but this is how you would
+      use indexing on locators.
+    </li>
+    <li>
+      By.linkText - if you have an 'a' tag, you can use the text from it to identify
+      <br>
+      <code>driver.findElement(By.linkText("Forgot your password?")).click();</code>
+      <button
+      class="js-modal-trigger button is-primary"
+      data-target="modal-js-link"
+    >
+      See image
+    </button>
+      <div id="modal-js-link" class="modal">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+          <div class="box">
+            <img class="has-ratio" width="640" height="360"src="./linkLocator.png">
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      By.partialLinkText - if you only want to use part of the link text
+      <br>
+      <code>driver.findElement(By.partialLinkText("Forgot")).click();</code>
+      <button
+      class="js-modal-trigger button is-primary"
+      data-target="modal-js-link"
+    >
+      See image
+    </button>
+      <div id="modal-js-link" class="modal">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+          <div class="box">
+            <img class="has-ratio" width="640" height="360"src="./linkLocator.png">
+          </div>
+        </div>
+      </div>
+    </li>
+  
   </section>
+
+
+<br>
+<br>
+
+
+
+
   <section class="section" id="common-elements">
     <h1 class="title">Common Elements</h1>
     <h2 class="subtitle">
-      A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading.
+      Dropdowns
     </h2>
-    <p>Here is some code</p>
-  <code> this should be in a code block</code>
+    <p>		
+      There are a few ways to handle dropdowns, first you have static where the HTML tag is a 'select':
+      <br>
+      <br>
+     Locate the dropdown <code>WebElement staticDropdown = driver.findElement(By.id("ctl00_mainContent_DropDownListCurrency"));</code>
+      <br>
+      Create object of the class to get the methods <code>Select dropdown = new Select(staticDropdown);</code>
+      <br>
+      Then below are some of the ways:
+      <br>
+      By index - so it will select the 3rd item in dropdown <code>dropdown.selectByIndex(3);</code>
+      <br>
+      By visible text - it will find an item by specific text provided <code>dropdown.selectByVisibleText("AED");</code>
+     <br>
+      By value - if the option has a value in HTML <code>dropdown.selectByValue("INR"); </code>
+     </p>
+
+     <br>
+     <br>
+     <p>
+      Then there are dynamic dropdowns - when the user has to type to return a list which matches what 
+      they have typed.
+    <br>
+    Firstly, locate the element where you will type and send the letters <code>driver.findElement(By.id("autosuggest")).sendKeys("ind");</code>
+    <br>
+    Then you create a List object using the element<code>	List<WebElement> options = driver.findElements(By.cssSelector("li[class='ui-menu-item'] a"));</code>
+      <br>
+      Then create a loop to go through each dropdown item which matches what was typed
+      and once it finds a match of the option you are looking for use the click method and then break 
+      out of the loop.
+	<br>
+
+	<code>
+    for(WebElement option: options)
+    <br>
+		{
+      <br>
+			if (option.getText().equalsIgnoreCase("India"))
+      <br>
+					{
+            <br>
+						option.click();
+            <br>
+						break;
+            <br>
+					}
+          <br>
+		}
+
+  </code>	
+
+     </p>
+<br>
+     <h2 class="subtitle">
+      Checkboxes
+    </h2>
+    <p>
+      Checkboxes are pretty starightforward - just locate the element using a locator and pick a method 
+      <code>driver.findElement(By.cssSelector("input[id*='friendsandfamily']")).click();</code> or 
+      find out if its currently selected - will return Boolean  
+      <code>System.out.println(driver.findElement(By.cssSelector("input[id*='friendsandfamily']")).isSelected());</code>
+    </p>
+    <button
+    class="js-modal-trigger button is-primary"
+    data-target="modal-js-checkbox"
+  >
+    See image
+  </button>
+    <div id="modal-js-checkbox" class="modal">
+      <div class="modal-background"></div>
+
+      <div class="modal-content">
+        <div class="box">
+          <img class="has-ratio" width="640" height="360"src="./checkbox.png">
+        </div>
+      </div>
+    </div>
+
+    <h2 class="subtitle">
+      Radio Buttons
+    </h2>
+
+    <p>
+      Radio Buttons are also pretty starightforward - just locate the element using a locator and pick a method 
+      <code>driver.findElement(By.id("ctl00_mainContent_rbtnl_Trip_1")).click();</code> or 
+      find out if its currently selected - will return Boolean  
+      <code>System.out.println(driver.findElement(By.id("ctl00_mainContent_rbtnl_Trip_1")).click();).isSelected());</code>
+    </p>
+
+
   </section>
+
   <section class="section" id="calendars">
     <h1 class="title">Calendars, Tables and Grids</h1>
     <h2 class="subtitle">
-      A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading.
+      To handle calendars you need to click on the next button to skip months until September is displayed
+
     </h2>
-    <p>Here is some code</p>
-  <code> this should be in a code block</code>
+    <p>
+   <br> 
+<code>
+  while(!driver.findElement(By.cssSelector("[class='datepicker-days'] 
+  <br>
+  [class='datepicker-switch']")).getText().contains("September"))
+<br>
+{
+  <br>
+  driver.findElement(By.cssSelector("[class='datepicker-days'] th[class='next']")).click();
+  <br>
+  ]
+  <br>
+
+</code>
+
+Then get count of day elements in list and then loop through until it gets to count by
+getting the text displayed on each date and compare to the date you want to click on
+<code>
+
+<br>
+List<WebElement> dates= driver.findElements(By.className("day"));
+<br>
+int count=driver.findElements(By.className("day")).size();
+<br>
+for(int i=0;i<count;i++)
+<br>
+{
+<br>
+String text=driver.findElements(By.className("day")).get(i).getText();
+<br>
+if(text.equalsIgnoreCase("21"))
+<br>
+{
+<br>
+driver.findElements(By.className("day")).get(i).click();
+<br>
+break;
+<br>
+}
+<br>
+}
+
+<br>
+
+</code>
+
+    </p>
+
+    <h2 class="subtitle">
+      Tables
+    </h2>
+<br>
+<p>
+  In this example of a table we use the the Javascript executor which allows us to use some extra methods.
+  In this example we are creating a new instance called called <code>js</code> and then instead of Selenium
+  locators we use the Javascript types of <code>document.querySelector</code> and put a . before the class 
+  name. This example also shows you how to get the total value of some numbers in a table by creating a 
+  list and iterating through the column using the child traverse locator <code>td:nth-child(4)</code> 
+  which is the fourth column in the table.
+
+</p>
+<br>
+<code>		JavascriptExecutor js = (JavascriptExecutor)driver;
+  <br>
+  js.executeScript("window.scrollBy(0,500)");
+  <br>
+  Thread.sleep(5000);
+  <br>
+  js.executeScript("document.querySelector('.tableFixHead').scrollTop=5000");
+  <br>
+  List<WebElement> values = driver.findElements(By.cssSelector(".tableFixHead td:nth-child(4)"));
+ <br>
+    int sum = 0;
+  <br>
+  for(int i=0;i<values.size();>
+<br>
+
+  i++);
+  <br>
+  {
+  <br>
+    sum = sum + Integer.parseInt(values.get(i).getText());
+    <br>
+  }
+  <br>
+    System.out.println(sum);
+    <br>	
+  int total = Integer.parseInt(driver.findElement(By.cssSelector(".totalAmount")).getText().split(":")[1].trim());
+    <br>
+  Assert.assertEquals(sum, total);</code>
+  <button
+    class="js-modal-trigger button is-primary"
+    data-target="modal-js-table"
+  >
+    See image
+  </button>
+    <div id="modal-js-table" class="modal">
+      <div class="modal-background"></div>
+
+      <div class="modal-content">
+        <div class="box">
+          <img class="has-ratio" width="640" height="360"src="./table.png">
+        </div>
+      </div>
+    </div>
+  
+    <br>
+
+  
   </section>
   <section class="section" id="sync">
     <h1 class="title">Sync</h1>
     <h2 class="subtitle">
-      A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading.
+     There a different ways of syncing or waiting for objects to appear on the page. Its important
+     to use these as your script maybe trying to perform an action on an element which hasn't loaded
+     yet. 
     </h2>
-    <p>Here is some code</p>
-  <code> this should be in a code block</code>
+    <p>Implicit Wait - set globally so applies to every step, if element appears before set time it will come out of
+      it and execute - e.g if you implicit 5 seconds and element appears in 2 seconds it will go after 2</p>
+      
+      <code>driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);</code>
+    <br>
+    <br>
+    <p>Explicit Wait - used for specific steps/scenariosnif you know it will take longer. There are also
+      some methods where you can either wait for a specific time or until something is visible. So you
+      create and object of the class and set a maximum time limit that you want to wait - then at the steps
+      where you want the wait you set your conditions.
+    </p>
+   
+    <code>WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(7000));</code>
+    <code>wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("okayBtn")));</code>
+  <br>
+  <br>
+    <p>Fluent Wait - this is similar to explicit wait but this takes additional parameters and will
+      check for the element at polling intervals that you set.
+    </p>
+ 
+    <code> Wait wait = new FluentWait(WebDriver reference)
+      .withTimeout(Duration.ofSeconds(SECONDS))
+      .pollingEvery(Duration.ofSeconds(SECONDS))
+      .ignoring(Exception.class);</code>
+ <br>
+ <br>
+    <p>Sleep - this is a Java method which will literally stop the script for desired time at a certain
+      point - its not really used that much but can be useful when debugging.
+    </p>
+    
+  <code>Thread.Sleep(5000)</code>
   </section>
     
 

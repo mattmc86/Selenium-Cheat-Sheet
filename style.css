@@ -1,3 +1,7 @@
 #header{
     color: blue;
 }
+
+.heroSection{
+    background-image: url(./codeImage.jpg);
+}

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selenium Cheat Sheet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+       <div class="navbar-brand">
+       
+  
+          <a
+            role="button"
+            class="navbar-burger"
+            id="burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div> 
+  
+        <div class="navbar-menu" id="navbarBasicExample">
+          <div class="navbar-start"> 
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Menu
+              </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="./index.html">Home</a>
+              <a class="navbar-item" href="#locators">Locators</a>
+              <a class="navbar-item" href="#common-elements">Common Elements</a>
+              <a class="navbar-item" href="#calendars">Calendars, Tables and Grids</a>
+              <a class="navbar-item" href="#sync">Sync</a>
+              <a class="navbar-item" href="./actions.html">Actions</a>
+              <a class="navbar-item" href="./actions.html">Frames and Windows</a>
+              <a class="navbar-item" href="./actions.html">Assert</a>
+              <a class="navbar-item" href="./screenshots.html">Screenshots/SSL Cookies</a>
+              <a class="navbar-item" href="./screenshots.html">File Downloads</a>
+              <a class="navbar-item" href="./screenshots.html">Global Environment</a>
+              <a class="navbar-item" href="./coreJava.html">Core Java</a>
+              <a class="navbar-item" href="./maven.html">TestNG and Maven</a>
+              <a class="navbar-item" href="./jenkins.html">Jenkins</a>
+            </div>
+          </div>
+
+         
+        </div>
+      </nav>
+
+
+      <section class="hero is-small">
+        <!-- <figure class="image is-16by9">
+          <image class="has-ratio" width="640" height="360" src="./codeImage.jpg" frameborder="0" allowfullscreen></iframe>
+        </figure> -->
+      <div class="hero-body">
+        <p class="title">
+    Data Driven 
+        </p>
+        <p class="subtitle">
+      Below is the code needed to use excel with your test framework
+        </p>
+      </div>
+
+      <code>
+        package mavenpractise.datadriven;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.NumberToTextConverter;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class dataDriven {
+
+//Identify Testcases coloum by scanning the entire 1st row
+//once coloumn is identified then scan entire testcase coloum to identify purcjhase testcase row
+//after you grab purchase testcase row = pull all the data of that row and feed into test
+
+public ArrayList<String> getData(String testcaseName) throws IOException
+{
+//fileInputStream argument
+ArrayList<String> a=new ArrayList<String>();
+
+FileInputStream fis=new FileInputStream("C://Users//rahul//Documents//demodata.xlsx");
+XSSFWorkbook workbook=new XSSFWorkbook(fis);
+
+int sheets=workbook.getNumberOfSheets();
+for(int i=0;i<sheets;i++)
+{
+if(workbook.getSheetName(i).equalsIgnoreCase("testdata"))
+{
+XSSFSheet sheet=workbook.getSheetAt(i);
+//Identify Testcases coloum by scanning the entire 1st row
+
+Iterator<Row>  rows= sheet.iterator();// sheet is collection of rows
+Row firstrow= rows.next();
+Iterator<Cell> ce=firstrow.cellIterator();//row is collection of cells
+int k=0;
+int coloumn = 0;
+while(ce.hasNext())
+{
+Cell value=ce.next();
+
+if(value.getStringCellValue().equalsIgnoreCase("TestCases"))
+{
+coloumn=k;
+
+}
+
+k++;
+}
+System.out.println(coloumn);
+
+////once coloumn is identified then scan entire testcase coloum to identify purcjhase testcase row
+while(rows.hasNext())
+{
+
+Row r=rows.next();
+
+if(r.getCell(coloumn).getStringCellValue().equalsIgnoreCase(testcaseName))
+{
+
+////after you grab purchase testcase row = pull all the data of that row and feed into test
+
+Iterator<Cell>  cv=r.cellIterator();
+while(cv.hasNext())
+{
+Cell c= cv.next();
+if(c.getCellType()==CellType.STRING)
+{
+
+a.add(c.getStringCellValue());
+}
+else{
+
+a.add(NumberToTextConverter.toText(c.getNumericCellValue()));
+
+}
+}
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+}
+}
+return a;
+
+}
+
+public static void main(String[] args) throws IOException {
+// TODO Auto-generated method stub
+
+}
+
+}
+
+
+      </code>
+      <p>
+        Then here is the pom.xml File
+        <code>
+          <?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>mavenpractise</groupId>
+  <artifactId>datadriven</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <name>datadriven</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml-schemas</artifactId>
+    <version>4.1.2</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>5.2.2</version>
+</dependency>
+
+    
+  </dependencies>
+
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
+
+        </code>
+      </p>
+    </section>
+  
+   
+  <script src="script.js"></script>
+</body>
+</html>
