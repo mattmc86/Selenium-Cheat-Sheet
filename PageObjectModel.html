@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selenium Cheat Sheet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+       <div class="navbar-brand">
+       
+  
+          <a
+            role="button"
+            class="navbar-burger"
+            id="burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div> 
+  
+        <div class="navbar-menu" id="navbarBasicExample">
+          <div class="navbar-start"> 
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Menu
+              </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="./home.html">Home</a>
+              <a class="navbar-item" href="#locators">Locators</a>
+              <a class="navbar-item" href="#common-elements">Common Elements</a>
+              <a class="navbar-item" href="#calendars">Calendars, Tables and Grids</a>
+              <a class="navbar-item" href="#sync">Sync</a>
+              <a class="navbar-item" href="./actions.html">Actions</a>
+              <a class="navbar-item" href="./PageObjectModel.html">Page Object Model</a>
+              <a class="navbar-item" href="./actions.html">Frames and Windows</a>
+              <a class="navbar-item" href="./actions.html">Assert</a>
+              <a class="navbar-item" href="./screenshots.html">Screenshots/SSL Cookies</a>
+              <a class="navbar-item" href="./screenshots.html">File Downloads</a>
+              <a class="navbar-item" href="./screenshots.html">Global Environment</a>
+              <a class="navbar-item" href="./coreJava.html">Core Java</a>
+              <a class="navbar-item" href="./maven.html">TestNG and Maven</a>
+              <a class="navbar-item" href="./jenkins.html">Jenkins</a>
+            </div>
+          </div>
+
+         
+        </div>
+      </nav>
+->
+
+  <section class="section" id="pom">
+    <h1 class="title">Page Object Model</h1>
+    <h2 class="subtitle">
+    </section>
+    
+    <h2 class="subtitle">
+      Page Object Model is a way to structure your code to make it more resuasble and easy to reconfigure. In a nutshell
+      you are creating a class for each page on the web application and using Page Facotry to store the elements.
+      Then you create methods for what you want to do e.g. click(). or sendKeys(). Then in your tests you create 
+      an object of the class and access the methods and pass any parameters.
+
+    </h2>
+
+   
+  
+      <br>
+  
+   
+    
+            <img class="has-ratio" width="640" height="360"src="./page.png">
+        
+            <h2 class="subtitle">
+              Absract components
+              <br>
+              This is where you add common actions that can be used on multiple pages. For example, maximise browser or wait for elements to appear.
+              In all of the Page Classes you need to extend the Abstract Component in the main method.
+          Then again in Page Class create a constructor make sure you add super(driver); to allow the Page Class to inherit the abstract components.
+        
+            </h2>
+            <h2 class="subtitle">
+           Page Classes
+              <br>
+              This is where you add the elements that are on each page. For example, the LandingPage class would have things like email, password fields and login button.
+              First, you need to initialize the driver by creating a new local Webdriver driver;
+              Create a constructor and pass the Webdriver driver as parameters.
+              Inside the constructor add This.driver=driver;
+              Then use PageFactory to identify the elements (see next page)
+              You can then create methods within this class which perform actions on this page. For example, sendKeys() or click()
+              Then again in Page Class create a constructor make sure you add super(driver); to allow the Page Class to inherit the abstract components.
+        
+            </h2>
+
+            <h2 class="subtitle">
+              Page Facotry
+              <br>
+              PageFactory is a good way to identify and store your elements.
+First in your constructor initialize it and the driver:
+PageFactory.initElements(driver, this)
+Then outside of the constructor use @FindBy to list the elements and store them as WebElements
+@FindBy(id/xpath/css/class= ‘XXX’)
+WebElement XXX
+To see what you put after FindBy you can click on it and it will show you the exact wording needed for each tag type.
+Now you can create methods using these WebElements
+            </h2>
+
+            <h2 class="subtitle">
+              Tests
+              <br>
+              So now when you create your tests you create new object of the class from the page class and you can then access the methods within it and pass parameters if required.
+
+            LandingPage landingPage = new LandingPage;
+            landingPage.login(“email@test.com”, “password1”);
+            </h2>
+
+  <script src="script.js"></script>
+</body>
+</html>

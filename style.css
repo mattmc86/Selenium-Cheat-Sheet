@@ -5,3 +5,76 @@
 .heroSection{
     background-image: url(./codeImage.jpg);
 }
+
+*{
+    font-family: monospace;
+}
+
+/* 
+/* #start-btn{
+    color:white;
+    background-color: purple;
+    width: 100px;
+    border-radius: 10%;
+} */
+
+/* .startPage{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+} */
+
+/* body{
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+   
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.buttons{
+display: flex;
+flex-direction: column;
+margin: 30px;
+
+}
+
+.start{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn{
+margin: 4px;
+color: white;
+background-color: purple;
+font-weight: bold;
+border-radius: 15%;
+}
+
+#start-btn{
+    margin: 4px;
+    color: white;
+    background-color: purple;
+    font-weight: bold;
+    border-radius: 15%;
+    width: 100px;
+    height: 50px;
+}
+
+.btn:hover{
+    background-color: lightpink;
+}
+
+.hide{
+    display: none;
+} */

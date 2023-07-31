@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selenium Cheat Sheet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+       <div class="navbar-brand">
+       
+  
+          <a
+            role="button"
+            class="navbar-burger"
+            id="burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div> 
+  
+        <div class="navbar-menu" id="navbarBasicExample">
+          <div class="navbar-start"> 
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Menu
+              </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="./home.html">Home</a>
+              <a class="navbar-item" href="#locators">Locators</a>
+              <a class="navbar-item" href="#common-elements">Common Elements</a>
+              <a class="navbar-item" href="#calendars">Calendars, Tables and Grids</a>
+              <a class="navbar-item" href="#sync">Sync</a>
+              <a class="navbar-item" href="./actions.html">Actions</a>
+              <a class="navbar-item" href="./PageObjectModel.html">Page Object Model</a>
+              <a class="navbar-item" href="./properties.html">Properties</a>
+              <a class="navbar-item" href="./actions.html">Frames and Windows</a>
+              <a class="navbar-item" href="./actions.html">Assert</a>
+              <a class="navbar-item" href="./screenshots.html">Screenshots/SSL Cookies</a>
+              <a class="navbar-item" href="./screenshots.html">File Downloads</a>
+              <a class="navbar-item" href="./screenshots.html">Global Environment</a>
+              <a class="navbar-item" href="./coreJava.html">Core Java</a>
+              <a class="navbar-item" href="./maven.html">TestNG and Maven</a>
+              <a class="navbar-item" href="./jenkins.html">Jenkins</a>
+            </div>
+          </div>
+
+         
+        </div>
+      </nav>
+->
+
+  <section class="section" id="pom">
+    <h1 class="title">Properties</h1>
+    <h2 class="subtitle">
+    </section>
+    
+    <h2 class="subtitle">
+      
+
+    </h2>
+
+   
+  
+      <br>
+  
+   
+    
+
+        
+            <h2 class="subtitle">
+              It is good practise to use a file to list data which would be reused in different tests. A good example
+              is the browser. Under the main folder add a new folder called resources and then create new file in there.
+              In that file you can set key value pairs (e.g. browser=chrome). Make sure you save the file with .properties 
+              extension so that you can use the Java Properties class to get methods. 
+              <br>
+              Then when you create a new test in your method you use the Properties and FileInputStream to access
+              that data from the file.
+              <br>
+              <code>
+                Properties prop = new Properties();
+                <br>
+	
+		          FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"//src//main//java//Automation//SeleniumFrameworkDesign//resources//GlobalData.properties");
+		          <br>
+              prop.load(fis);
+                <br>
+	          	String browserName = prop.getProperty("browser");
+              </code>
+
+        
+            </h2>
+         
+
+       
+
+            <h2 class="subtitle">
+              Tests
+              <br>
+              So now when you create your tests you create new object of the class from the page class and you can then access the methods within it and pass parameters if required.
+
+            LandingPage landingPage = new LandingPage;
+            landingPage.login(“email@test.com”, “password1”);
+            </h2>
+
+  <script src="script.js"></script>
+</body>
+</html>
